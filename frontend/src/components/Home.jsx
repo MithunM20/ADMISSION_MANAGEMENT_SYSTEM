@@ -3,6 +3,7 @@ import { ArrowRight, Star, BookOpen, Users, Award, X } from "lucide-react";
 import mernCourseImage from "../assets/course-mern.svg";
 import djangoCourseImage from "../assets/course-django.svg";
 import marketingCourseImage from "../assets/course-marketing.svg";
+import { API_BASE_URL } from "../config";
 
 const courses = [
   {
@@ -70,7 +71,7 @@ const Home = () => {
     e.preventDefault();
     const finalData = { ...formData, status: "new" };
 
-    fetch("http://localhost:5000/api/leads", {
+    fetch(`${API_BASE_URL}/api/leads`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(finalData),

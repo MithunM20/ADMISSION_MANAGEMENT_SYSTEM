@@ -3,8 +3,7 @@ import axios from "axios";
 import { Eye, X, Mail, CheckCircle, Download, FileText } from "lucide-react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
-const API_BASE_URL = "http://localhost:5000";
+import { API_BASE_URL } from "../../config";
 
 function Admissions() {
   const [admissions, setAdmissions] = useState([]);

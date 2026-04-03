@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { API_BASE_URL } from "../../config";
 
 const FeesCollection = () => {
   const [transactions, setTransactions] = useState([]);
@@ -10,7 +11,7 @@ const FeesCollection = () => {
     const fetchTransactions = async () => {
       setIsLoading(true);
       try {
-        const response = await fetch("http://localhost:5000/api/payments", {
+        const response = await fetch(`${API_BASE_URL}/api/payments`, {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
@@ -35,7 +36,7 @@ const FeesCollection = () => {
   const verifyTransaction = async (transactionId) => {
     setIsLoading(true);
     try {
-      const response = await fetch("http://localhost:5000/api/payments/update-status", {
+      const response = await fetch(`${API_BASE_URL}/api/payments/update-status`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -55,7 +56,7 @@ const FeesCollection = () => {
       setMessage("Transaction verified successfully!");
 
       // Refresh transactions
-      const updatedTransactions = await fetch("http://localhost:5000/api/payments").then(res => res.json());
+      const updatedTransactions = await fetch(`${API_BASE_URL}/api/payments`).then(res => res.json());
       setTransactions(updatedTransactions);
     } catch (error) {
       setMessage("Error verifying transaction: " + error.message);

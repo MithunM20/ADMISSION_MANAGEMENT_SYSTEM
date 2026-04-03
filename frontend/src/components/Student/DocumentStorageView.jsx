@@ -1,8 +1,7 @@
 import { useState } from "react";
 import { FiEye, FiX } from "react-icons/fi";
 import axios from "axios";
-
-const API_BASE_URL = "http://localhost:5000";
+import { API_BASE_URL } from "../../config";
 
 function DocumentStorageView({ documents = [] }) {
   const [previewFile, setPreviewFile] = useState(null);

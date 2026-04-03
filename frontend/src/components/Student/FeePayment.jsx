@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { jsPDF } from "jspdf";
+import { API_BASE_URL } from "../../config";
 
 const FeePayment = () => {
   const [paymentStatus, setPaymentStatus] = useState(null);
@@ -28,7 +29,7 @@ const FeePayment = () => {
           setFee(sampleCourses[0].fee);
         }
 
-        const response = await fetch("http://localhost:5000/api/payments", {
+        const response = await fetch(`${API_BASE_URL}/api/payments`, {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
@@ -78,7 +79,7 @@ const FeePayment = () => {
     setPaymentStatus("Initiating payment...");
 
     try {
-      const orderResponse = await fetch("http://localhost:5000/api/payments/create-order", {
+      const orderResponse = await fetch(`${API_BASE_URL}/api/payments/create-order`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -107,7 +108,7 @@ const FeePayment = () => {
         description: `Fee Payment for ${selectedCourse}`,
         order_id: orderData.orderId,
         handler: async function (response) {
-          const verifyResponse = await fetch("http://localhost:5000/api/payments/verify-payment", {
+          const verifyResponse = await fetch(`${API_BASE_URL}/api/payments/verify-payment`, {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
@@ -126,7 +127,7 @@ const FeePayment = () => {
 
           const verifyData = await verifyResponse.json();
           setPaymentStatus(`Payment successful for ${selectedCourse}! Payment ID: ${response.razorpay_payment_id}`);
-          const updatedTransactions = await fetch("http://localhost:5000/api/payments").then(res => res.json());
+          const updatedTransactions = await fetch(`${API_BASE_URL}/api/payments`).then(res => res.json());
           setTransactions(updatedTransactions.filter(tx => tx.status === "completed"));
         },
         prefill: {

@@ -4,8 +4,7 @@ import DocumentStorageView from "./DocumentStorageView";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
-
-const API_BASE_URL = "http://localhost:5000";
+import { API_BASE_URL } from "../../config";
 
 const ALLOWED_FORMATS = {
   photoId: ["image/jpeg", "image/jpg", "image/png"],

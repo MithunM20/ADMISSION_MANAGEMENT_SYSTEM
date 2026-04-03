@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Mail, MessageCircle, MessageSquare } from "lucide-react";
+import { API_BASE_URL } from "../../config";
 
 const Enquiries = () => {
   const [leads, setLeads] = useState([]);
@@ -9,7 +10,7 @@ const Enquiries = () => {
   useEffect(() => {
     const fetchLeads = async () => {
       try {
-        const res = await axios.get("http://localhost:5000/api/leads", {
+        const res = await axios.get(`${API_BASE_URL}/api/leads`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         setLeads(res.data);

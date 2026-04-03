@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Menu, X, User as UserIcon, LogOut } from "lucide-react";
+import { API_BASE_URL } from "../config";
 
 const Navbar = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -43,8 +44,8 @@ const Navbar = () => {
     e.preventDefault();
     try {
       const endpoint = isLogin
-        ? "http://localhost:5000/api/auth/login"
-        : "http://localhost:5000/api/auth/register";
+        ? `${API_BASE_URL}/api/auth/login`
+        : `${API_BASE_URL}/api/auth/register`;
       const response = await fetch(endpoint, {
         method: "POST",
         headers: {
