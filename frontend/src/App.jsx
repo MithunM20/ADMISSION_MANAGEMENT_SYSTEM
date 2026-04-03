@@ -5,7 +5,7 @@ import Home from "./components/Home";
 import Student from "./components/Student/Student";
 import Admin from "./components/Admin/Admin";
 import Enquiry from "./components/Admin/Enquiry";
-import Admissions from "./components/Admin/admissions";
+import Admissions from "./components/Admin/Admissions";
 import FeesCollection from "./components/Admin/FeesCollection";
 
 const AppContent = () => {
