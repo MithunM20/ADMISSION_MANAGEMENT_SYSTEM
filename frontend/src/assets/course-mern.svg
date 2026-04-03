@@ -1,0 +1,37 @@
+<svg width="1200" height="800" viewBox="0 0 1200 800" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="800" rx="48" fill="url(#bg)"/>
+  <circle cx="1050" cy="120" r="180" fill="white" fill-opacity="0.08"/>
+  <circle cx="150" cy="680" r="220" fill="#38BDF8" fill-opacity="0.12"/>
+  <rect x="108" y="126" width="546" height="368" rx="28" fill="#0F172A" fill-opacity="0.88" stroke="white" stroke-opacity="0.18" stroke-width="4"/>
+  <rect x="138" y="156" width="486" height="44" rx="14" fill="white" fill-opacity="0.08"/>
+  <circle cx="172" cy="178" r="8" fill="#FB7185"/>
+  <circle cx="200" cy="178" r="8" fill="#FBBF24"/>
+  <circle cx="228" cy="178" r="8" fill="#4ADE80"/>
+  <rect x="154" y="242" width="176" height="18" rx="9" fill="#38BDF8"/>
+  <rect x="154" y="282" width="318" height="16" rx="8" fill="white" fill-opacity="0.18"/>
+  <rect x="154" y="316" width="258" height="16" rx="8" fill="white" fill-opacity="0.14"/>
+  <rect x="154" y="350" width="332" height="16" rx="8" fill="white" fill-opacity="0.1"/>
+  <rect x="154" y="384" width="228" height="16" rx="8" fill="white" fill-opacity="0.08"/>
+  <path d="M764 468C764 435.967 789.967 410 822 410H1024C1056.03 410 1082 435.967 1082 468V514C1082 546.033 1056.03 572 1024 572H822C789.967 572 764 546.033 764 514V468Z" fill="#22C55E"/>
+  <path d="M785 468C785 447.013 802.013 430 823 430H1023C1043.99 430 1061 447.013 1061 468V514C1061 534.987 1043.99 552 1023 552H823C802.013 552 785 534.987 785 514V468Z" fill="#052E16"/>
+  <path d="M869 430V552" stroke="white" stroke-opacity="0.14" stroke-width="2"/>
+  <path d="M950 430V552" stroke="white" stroke-opacity="0.14" stroke-width="2"/>
+  <ellipse cx="904" cy="356" rx="102" ry="34" fill="#10B981"/>
+  <path d="M802 356V436C802 454.778 847.667 470 904 470C960.333 470 1006 454.778 1006 436V356" fill="#059669"/>
+  <path d="M802 396C802 414.778 847.667 430 904 430C960.333 430 1006 414.778 1006 396" stroke="#A7F3D0" stroke-width="4" stroke-linecap="round"/>
+  <path d="M802 436C802 454.778 847.667 470 904 470C960.333 470 1006 454.778 1006 436" stroke="#A7F3D0" stroke-width="4" stroke-linecap="round"/>
+  <circle cx="844" cy="196" r="74" stroke="#7DD3FC" stroke-width="10"/>
+  <ellipse cx="844" cy="196" rx="116" ry="42" transform="rotate(30 844 196)" stroke="#7DD3FC" stroke-width="10"/>
+  <ellipse cx="844" cy="196" rx="116" ry="42" transform="rotate(-30 844 196)" stroke="#7DD3FC" stroke-width="10"/>
+  <circle cx="844" cy="196" r="18" fill="#E0F2FE"/>
+  <rect x="106" y="588" width="988" height="112" rx="28" fill="white" fill-opacity="0.12" stroke="white" stroke-opacity="0.18" stroke-width="3"/>
+  <text x="156" y="646" fill="white" font-family="Arial, sans-serif" font-size="52" font-weight="700">MERN STACK</text>
+  <text x="156" y="688" fill="#D6F4FF" font-family="Arial, sans-serif" font-size="26" font-weight="500">MongoDB + Express + React + Node.js</text>
+  <defs>
+    <linearGradient id="bg" x1="90" y1="54" x2="1064" y2="774" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0F172A"/>
+      <stop offset="0.52" stop-color="#155E75"/>
+      <stop offset="1" stop-color="#0369A1"/>
+    </linearGradient>
+  </defs>
+</svg>

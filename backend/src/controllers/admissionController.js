@@ -147,6 +147,7 @@ exports.getMyAdmission = async (req, res) => {
       email: admission.email,
       phone: admission.phone,
       course: admission.course,
+      referralCode: admission.referralCode || "",
       studentId: admission.studentId || null, // Include student ID if assigned
       documents: admission.documents,
       status: admission.status,

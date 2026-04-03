@@ -1,0 +1,35 @@
+<svg width="1200" height="800" viewBox="0 0 1200 800" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="800" rx="48" fill="url(#bg)"/>
+  <circle cx="1028" cy="130" r="176" fill="white" fill-opacity="0.08"/>
+  <circle cx="190" cy="662" r="214" fill="#F97316" fill-opacity="0.12"/>
+  <rect x="108" y="124" width="580" height="374" rx="30" fill="#431407" fill-opacity="0.84" stroke="white" stroke-opacity="0.16" stroke-width="4"/>
+  <rect x="140" y="158" width="516" height="44" rx="14" fill="white" fill-opacity="0.08"/>
+  <circle cx="174" cy="180" r="8" fill="#FB7185"/>
+  <circle cx="202" cy="180" r="8" fill="#FBBF24"/>
+  <circle cx="230" cy="180" r="8" fill="#4ADE80"/>
+  <path d="M174 414C174 400.745 184.745 390 198 390H246C259.255 390 270 400.745 270 414V452H174V414Z" fill="#FDBA74"/>
+  <path d="M294 362C294 348.745 304.745 338 318 338H366C379.255 338 390 348.745 390 362V452H294V362Z" fill="#FB7185"/>
+  <path d="M414 316C414 302.745 424.745 292 438 292H486C499.255 292 510 302.745 510 316V452H414V316Z" fill="#FDE68A"/>
+  <path d="M534 254C534 240.745 544.745 230 558 230H606C619.255 230 630 240.745 630 254V452H534V254Z" fill="#FDBA74"/>
+  <path d="M174 454H632" stroke="white" stroke-opacity="0.2" stroke-width="6" stroke-linecap="round"/>
+  <path d="M770 184L962 130C975.449 126.217 988 136.327 988 150.298V340.702C988 354.673 975.449 364.783 962 361L770 307V184Z" fill="#FB923C"/>
+  <rect x="738" y="220" width="52" height="254" rx="26" fill="#7C2D12"/>
+  <path d="M998 198L1052 162" stroke="#FFE7D3" stroke-width="14" stroke-linecap="round"/>
+  <path d="M1010 252H1080" stroke="#FFE7D3" stroke-width="14" stroke-linecap="round"/>
+  <path d="M998 306L1052 342" stroke="#FFE7D3" stroke-width="14" stroke-linecap="round"/>
+  <path d="M820 566L1000 474L1064 538L884 630L820 566Z" fill="#FFF7ED" fill-opacity="0.94"/>
+  <path d="M1000 474L960 602" stroke="#FDBA74" stroke-width="10" stroke-linecap="round"/>
+  <path d="M842 574L992 526" stroke="#FB923C" stroke-width="8" stroke-linecap="round"/>
+  <path d="M802 632C802 614.327 816.327 600 834 600H1090V648C1090 665.673 1075.67 680 1058 680H834C816.327 680 802 665.673 802 648V632Z" fill="white" fill-opacity="0.12" stroke="white" stroke-opacity="0.16" stroke-width="3"/>
+  <text x="838" y="642" fill="white" font-family="Arial, sans-serif" font-size="28" font-weight="700">Growth / SEO / Ads / Content</text>
+  <rect x="106" y="594" width="660" height="106" rx="28" fill="white" fill-opacity="0.12" stroke="white" stroke-opacity="0.18" stroke-width="3"/>
+  <text x="156" y="648" fill="white" font-family="Arial, sans-serif" font-size="48" font-weight="700">DIGITAL MARKETING</text>
+  <text x="156" y="688" fill="#FFE7D3" font-family="Arial, sans-serif" font-size="26" font-weight="500">Campaigns, content strategy, analytics, and brand growth</text>
+  <defs>
+    <linearGradient id="bg" x1="56" y1="42" x2="1102" y2="770" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#7C2D12"/>
+      <stop offset="0.52" stop-color="#EA580C"/>
+      <stop offset="1" stop-color="#EC4899"/>
+    </linearGradient>
+  </defs>
+</svg>

@@ -1,0 +1,35 @@
+<svg width="1200" height="800" viewBox="0 0 1200 800" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="800" rx="48" fill="url(#bg)"/>
+  <circle cx="1044" cy="126" r="170" fill="white" fill-opacity="0.08"/>
+  <circle cx="216" cy="694" r="198" fill="#34D399" fill-opacity="0.12"/>
+  <rect x="130" y="134" width="574" height="356" rx="30" fill="#052E16" fill-opacity="0.88" stroke="white" stroke-opacity="0.18" stroke-width="4"/>
+  <rect x="162" y="170" width="510" height="40" rx="14" fill="white" fill-opacity="0.08"/>
+  <circle cx="196" cy="190" r="8" fill="#F87171"/>
+  <circle cx="224" cy="190" r="8" fill="#FBBF24"/>
+  <circle cx="252" cy="190" r="8" fill="#4ADE80"/>
+  <rect x="184" y="246" width="154" height="20" rx="10" fill="#86EFAC"/>
+  <rect x="184" y="290" width="294" height="16" rx="8" fill="white" fill-opacity="0.16"/>
+  <rect x="184" y="324" width="226" height="16" rx="8" fill="white" fill-opacity="0.12"/>
+  <rect x="184" y="358" width="344" height="16" rx="8" fill="white" fill-opacity="0.1"/>
+  <rect x="184" y="392" width="282" height="16" rx="8" fill="white" fill-opacity="0.08"/>
+  <path d="M792 132C792 120.954 800.954 112 812 112H1054C1065.05 112 1074 120.954 1074 132V318C1074 329.046 1065.05 338 1054 338H812C800.954 338 792 329.046 792 318V132Z" fill="white" fill-opacity="0.12" stroke="white" stroke-opacity="0.16" stroke-width="4"/>
+  <path d="M906 174C925.33 174 942 190.893 942 211.5C942 244.625 906 258.5 906 258.5C906 258.5 870 244.625 870 211.5C870 190.893 886.67 174 906 174Z" fill="#FDE68A"/>
+  <path d="M916 238C916 252.912 927.193 265 941 265C954.807 265 966 252.912 966 238C966 223.088 954.807 211 941 211C927.193 211 916 223.088 916 238Z" fill="#60A5FA"/>
+  <path d="M956 248C956 262.912 967.193 275 981 275C994.807 275 1006 262.912 1006 248C1006 233.088 994.807 221 981 221C967.193 221 956 233.088 956 248Z" fill="#34D399"/>
+  <rect x="778" y="404" width="302" height="210" rx="36" fill="#064E3B"/>
+  <rect x="808" y="438" width="242" height="142" rx="24" fill="#10B981"/>
+  <path d="M862 470C870.837 470 878 462.837 878 454C878 445.163 870.837 438 862 438C853.163 438 846 445.163 846 454C846 462.837 853.163 470 862 470Z" fill="#E5E7EB"/>
+  <path d="M930 470C938.837 470 946 462.837 946 454C946 445.163 938.837 438 930 438C921.163 438 914 445.163 914 454C914 462.837 921.163 470 930 470Z" fill="#111827"/>
+  <path d="M846 528C846 498.176 870.176 474 900 474H956C985.824 474 1010 498.176 1010 528V580H846V528Z" fill="#ECFDF5"/>
+  <path d="M804 616H1070" stroke="white" stroke-opacity="0.24" stroke-width="6" stroke-linecap="round"/>
+  <rect x="106" y="594" width="988" height="106" rx="28" fill="white" fill-opacity="0.12" stroke="white" stroke-opacity="0.18" stroke-width="3"/>
+  <text x="156" y="648" fill="white" font-family="Arial, sans-serif" font-size="50" font-weight="700">PYTHON DJANGO</text>
+  <text x="156" y="688" fill="#D1FAE5" font-family="Arial, sans-serif" font-size="26" font-weight="500">Backend engineering, APIs, and scalable web apps</text>
+  <defs>
+    <linearGradient id="bg" x1="64" y1="46" x2="1090" y2="772" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#052E16"/>
+      <stop offset="0.55" stop-color="#166534"/>
+      <stop offset="1" stop-color="#047857"/>
+    </linearGradient>
+  </defs>
+</svg>

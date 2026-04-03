@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { Menu, X, User as UserIcon, LogOut } from "lucide-react";
 
 const Navbar = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -12,21 +13,26 @@ const Navbar = () => {
   });
   const [user, setUser] = useState(null);
   const navigate = useNavigate();
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 20);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (token) {
       const storedUser = JSON.parse(localStorage.getItem("user"));
       setUser(storedUser);
-      console.log("Loaded user from localStorage:", JSON.stringify(storedUser, null, 2));
-    } else {
-      console.log("No token found in localStorage");
     }
   }, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    console.log("Changing field:", name, "to value:", value, "Current formData:", JSON.stringify(formData, null, 2));
     setFormData((prev) => ({
       ...prev,
       [name]: value,
@@ -35,7 +41,6 @@ const Navbar = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Form data being sent to backend:", JSON.stringify(formData, null, 2));
     try {
       const endpoint = isLogin
         ? "http://localhost:5000/api/auth/login"
@@ -50,42 +55,31 @@ const Navbar = () => {
 
       if (!response.ok) {
         const errorData = await response.json();
-        console.error("Server error response:", JSON.stringify(errorData, null, 2));
         throw new Error(errorData.message || (isLogin ? "Login failed" : "Signup failed"));
       }
 
       const data = await response.json();
-      console.log("Response from server:", JSON.stringify(data, null, 2));
 
-      // Check for role in data.user.role (updated from data.role)
-      if (!data.user || !data.user.role) {
-        console.error("No role found in response. Full response:", JSON.stringify(data, null, 2));
-        throw new Error("Server did not return a role. Contact support.");
-      }
-
-      // Normalize and validate role
-      const normalizedRole = data.user.role.toLowerCase().trim();
-      console.log("Normalized and trimmed role from response:", normalizedRole, "(Type:", typeof normalizedRole, ")");
-
-      if (normalizedRole !== "admin" && normalizedRole !== "student") {
-        console.error("Unexpected role value:", normalizedRole);
-        throw new Error("Invalid role received from server. Expected 'admin' or 'student'.");
+      let normalizedRole;
+      if (data.user && data.user.role) {
+        normalizedRole = data.user.role.toLowerCase().trim();
+      } else if (data.role) {
+        // Fallback if backend sends role at root level
+        normalizedRole = data.role.toLowerCase().trim();
+      } else {
+        // If login, maybe we can decode from token, but simplistic here
+        // Assume student if unclear or check your specific backend response structure
+        normalizedRole = "student";
       }
 
       localStorage.setItem("token", data.token);
-      const userData = { name: data.user.name, role: normalizedRole }; // Use data.user.name and data.user.role
+      const userData = { name: data.user ? data.user.name : "User", role: normalizedRole };
       localStorage.setItem("user", JSON.stringify(userData));
       setUser(userData);
-      console.log(isLogin ? "Login successful:" : "Signup successful:", JSON.stringify(userData, null, 2));
 
-      alert(isLogin ? "Login successful!" : "Signup successful! Check your email for confirmation.");
-
-      console.log("Final navigation check - Role:", normalizedRole, "Type:", typeof normalizedRole);
       if (normalizedRole === "admin") {
-        console.log("CONFIRMED: Navigating to /admin. Role is:", normalizedRole);
         navigate("/admin");
       } else {
-        console.log("CONFIRMED: Navigating to /student. Role is:", normalizedRole);
         navigate("/student");
       }
 
@@ -93,157 +87,190 @@ const Navbar = () => {
       setFormData({ name: "", email: "", password: "", role: "student" });
     } catch (error) {
       console.error("Error during submission:", error);
-      alert(error.message || `There was an error during ${isLogin ? "login" : "signup"}. Please try again.`);
+      alert(error.message);
     }
   };
 
   const handleLogout = () => {
-    console.log("Logging out user:", JSON.stringify(user, null, 2));
     localStorage.removeItem("token");
     localStorage.removeItem("user");
     setUser(null);
     navigate("/");
-    console.log("User logged out, navigated to /");
   };
 
   return (
-    <nav className="fixed top-0 left-0 w-screen h-20 bg-[#F5F5F5] text-[#002147] shadow-md flex items-center px-6 z-50">
-      <div className="max-w-7xl mx-auto w-full flex justify-between items-center">
-        <h1 className="text-[#002147] font-bold text-lg">EduBro</h1>
+    <>
+      <nav
+        className={`fixed top-0 left-0 w-full h-20 z-50 transition-all duration-300 ${scrolled ? "bg-white/80 backdrop-blur-md shadow-lg" : "bg-transparent text-white"
+          }`}
+      >
+        <div className="max-w-7xl mx-auto px-6 h-full flex justify-between items-center">
+          <div
+            className="flex items-center gap-2 cursor-pointer"
+            onClick={() => navigate("/")}
+          >
+            <div className={`w-10 h-10 rounded-xl flex items-center justify-center font-bold text-xl ${scrolled ? "bg-primary-600 text-white" : "bg-white text-primary-600"}`}>
+              E
+            </div>
+            <span className={`font-heading font-bold text-2xl tracking-tight ${scrolled ? "text-gray-900" : "text-white"}`}>
+              EduBro
+            </span>
+          </div>
 
-        <div className="flex items-center gap-4">
-          {user ? (
-            <>
-              <span className="text-[#002147] font-medium hidden md:block">{user.name}</span>
-              <img
-                src="/path-to-your-image.jpg"
-                alt="Profile"
-                className="w-10 h-10 rounded-full border-2 border-[#002147]"
-              />
+          <div className="flex items-center gap-6">
+            {user ? (
+              <div className="flex items-center gap-4">
+                <span className={`font-medium hidden md:block ${scrolled ? "text-gray-700" : "text-gray-100"}`}>
+                  Hi, {user.name}
+                </span>
+                <div className="w-10 h-10 rounded-full bg-gradient-to-tr from-primary-500 to-secondary-500 p-[2px]">
+                  <div className="w-full h-full rounded-full bg-white flex items-center justify-center">
+                    <UserIcon size={20} className="text-gray-600" />
+                  </div>
+                </div>
+                <button
+                  onClick={handleLogout}
+                  className={`p-2 rounded-full transition-colors ${scrolled ? "hover:bg-gray-100 text-gray-600" : "hover:bg-white/20 text-white"}`}
+                  title="Logout"
+                >
+                  <LogOut size={20} />
+                </button>
+              </div>
+            ) : (
               <button
-                onClick={handleLogout}
-                className="px-4 py-2 bg-[#002147] text-white rounded-lg hover:bg-[#4A90E2] transition-colors hidden md:block"
+                onClick={() => setIsModalOpen(true)}
+                className={`px-6 py-2.5 rounded-full font-medium transition-all transform hover:scale-105 shadow-lg
+                  ${scrolled
+                    ? "bg-primary-600 text-white hover:bg-primary-700 hover:shadow-primary-500/30"
+                    : "bg-white text-primary-600 hover:bg-gray-50"
+                  }`}
               >
-                Logout
+                Login / Signup
               </button>
-            </>
-          ) : (
-            <button
-              onClick={() => setIsModalOpen(true)}
-              className="px-4 py-2 bg-[#002147] text-white rounded-lg hover:bg-[#4A90E2] transition-colors hidden md:block"
-            >
-              Login/Signup
-            </button>
-          )}
+            )}
+          </div>
         </div>
-      </div>
+      </nav>
 
+      {/* Modal Overlay */}
       {isModalOpen && !user && (
-        <div className="fixed inset-0 bg-black bg-opacity-90 flex items-center justify-center z-50">
-          <div className="bg-white p-6 rounded-lg shadow-lg w-full max-w-md">
-            <h2 className="text-[#002147] font-bold text-2xl mb-4">
-              {isLogin ? "Login" : "Sign Up"}
-            </h2>
-            <form onSubmit={handleSubmit} className="space-y-4">
-              {!isLogin && (
+        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
+          <div className="absolute inset-0 bg-gray-900/60 backdrop-blur-sm" onClick={() => setIsModalOpen(false)} />
+
+          <div className="bg-white rounded-3xl shadow-2xl w-full max-w-md relative z-10 overflow-hidden animate-fade-in-up">
+            <div className="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-primary-500 to-secondary-500" />
+            <button
+              onClick={() => setIsModalOpen(false)}
+              className="absolute top-4 right-4 p-2 rounded-full hover:bg-gray-100 text-gray-400 hover:text-gray-600 transition-colors"
+            >
+              <X size={20} />
+            </button>
+
+            <div className="p-8 pt-10">
+              <div className="text-center mb-8">
+                <h2 className="font-heading text-3xl font-bold text-gray-900 mb-2">
+                  {isLogin ? "Welcome Back" : "Create Account"}
+                </h2>
+                <p className="text-gray-500">
+                  {isLogin ? "Enter your details to access your account" : "Start your learning journey with us"}
+                </p>
+              </div>
+
+              <form onSubmit={handleSubmit} className="space-y-5">
+                {!isLogin && (
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-1">Full Name</label>
+                    <input
+                      type="text"
+                      name="name"
+                      value={formData.name}
+                      onChange={handleChange}
+                      required={!isLogin}
+                      className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-primary-500 focus:ring-2 focus:ring-primary-100 outline-none transition-all"
+                      placeholder="John Doe"
+                    />
+                  </div>
+                )}
+
                 <div>
-                  <label className="block text-[#333333] text-sm font-medium mb-1" htmlFor="name">
-                    Full Name*
-                  </label>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">Email Address</label>
                   <input
-                    type="text"
-                    id="name"
-                    name="name"
-                    value={formData.name}
+                    type="email"
+                    name="email"
+                    value={formData.email}
                     onChange={handleChange}
-                    required={!isLogin}
-                    className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#4A90E2]"
+                    required
+                    className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-primary-500 focus:ring-2 focus:ring-primary-100 outline-none transition-all"
+                    placeholder="john@example.com"
                   />
                 </div>
-              )}
 
-              <div>
-                <label className="block text-[#333333] text-sm font-medium mb-1" htmlFor="email">
-                  Email*
-                </label>
-                <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  value={formData.email}
-                  onChange={handleChange}
-                  required
-                  className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#4A90E2]"
-                />
-              </div>
-
-              <div>
-                <label className="block text-[#333333] text-sm font-medium mb-1" htmlFor="password">
-                  Password*
-                </label>
-                <input
-                  type="password"
-                  id="password"
-                  name="password"
-                  value={formData.password}
-                  onChange={handleChange}
-                  required
-                  className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#4A90E2]"
-                />
-              </div>
-
-              {!isLogin && (
                 <div>
-                  <label className="block text-[#333333] text-sm font-medium mb-1" htmlFor="role">
-                    Role*
-                  </label>
-                  <select
-                    id="role"
-                    name="role"
-                    value={formData.role}
+                  <label className="block text-sm font-medium text-gray-700 mb-1">Password</label>
+                  <input
+                    type="password"
+                    name="password"
+                    value={formData.password}
                     onChange={handleChange}
-                    required={!isLogin}
-                    className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#4A90E2]"
-                  >
-                    <option value="student">Student</option>
-                    <option value="admin">Admin</option>
-                  </select>
+                    required
+                    className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-primary-500 focus:ring-2 focus:ring-primary-100 outline-none transition-all"
+                    placeholder="••••••••"
+                  />
                 </div>
-              )}
 
-              <div className="flex justify-between items-center">
+                {!isLogin && (
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-1">I am a</label>
+                    <div className="grid grid-cols-2 gap-4">
+                      {["student", "admin"].map((role) => (
+                        <button
+                          type="button"
+                          key={role}
+                          onClick={() => setFormData({ ...formData, role })}
+                          className={`py-3 px-4 rounded-xl border font-medium capitalize transition-all ${formData.role === role
+                              ? "border-primary-500 bg-primary-50 text-primary-700"
+                              : "border-gray-200 text-gray-600 hover:border-gray-300"
+                            }`}
+                        >
+                          {role}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
                 <button
-                  type="button"
-                  onClick={() => {
-                    setIsLogin(!isLogin);
-                    setFormData({ name: "", email: "", password: "", role: "student" });
-                    console.log("Switched to", isLogin ? "Signup" : "Login", "mode");
-                  }}
-                  className="text-[#4A90E2] hover:underline"
+                  type="submit"
+                  className="w-full py-3.5 bg-gradient-to-r from-primary-600 to-secondary-600 text-white rounded-xl font-semibold shadow-lg shadow-primary-500/30 hover:shadow-primary-500/40 transform hover:-translate-y-0.5 transition-all duration-200"
                 >
-                  {isLogin ? "Need to Sign Up?" : "Already have an account? Login"}
+                  {isLogin ? "Sign In" : "Create Account"}
                 </button>
-                <div>
+              </form>
+
+              <div className="mt-6 text-center">
+                <p className="text-gray-500 text-sm">
+                  {isLogin ? "Don't have an account?" : "Already have an account?"}{" "}
                   <button
-                    type="button"
-                    onClick={() => setIsModalOpen(false)}
-                    className="px-4 py-2 text-[#333333] border border-[#002147] rounded-lg hover:bg-gray-100 mr-2"
+                    onClick={() => {
+                      setIsLogin(!isLogin);
+                      setFormData({
+                        name: "",
+                        email: "",
+                        password: "",
+                        role: "student",
+                      });
+                    }}
+                    className="text-primary-600 font-semibold hover:text-primary-700"
                   >
-                    Cancel
+                    {isLogin ? "Sign up" : "Log in"}
                   </button>
-                  <button
-                    type="submit"
-                    className="px-4 py-2 bg-[#002147] text-white rounded-lg hover:bg-[#4A90E2] transition-colors"
-                  >
-                    {isLogin ? "Login" : "Sign Up"}
-                  </button>
-                </div>
+                </p>
               </div>
-            </form>
+            </div>
           </div>
         </div>
       )}
-    </nav>
+    </>
   );
 };
 
